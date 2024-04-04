@@ -24,9 +24,18 @@ export default Server(() => {
 
     // GET
     app.get('/readings', (req, res) => {
+        const formattedReadings = sensorReadings.map(reading => {
+            return {
+                id: reading.id,
+                temperature: reading.temperature + "°C", 
+                soilHumidity: reading.soilHumidity + "%", 
+                relativeHumidity: reading.relativeHumidity + "%", 
+            };
+        });
+
         res.json({
             message: 'Lecturas de sensores:',
-            readings: sensorReadings,
+            readings: formattedReadings,
         });
     });
 
