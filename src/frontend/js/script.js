@@ -7,10 +7,14 @@ $(window).load(function(){
 		slideshow:6000
 	})
 })
+
+
+
 document.addEventListener('DOMContentLoaded', function() {
 	const form = document.getElementById('terreno-form');
 	const resultado = document.getElementById('resultado');
 	const svg = document.getElementById('terreno-svg');
+	const medidas = document.getElementById('medidas');
   
 	form.addEventListener('submit', function(event) {
 	  event.preventDefault();
@@ -33,6 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		}
   
 		dibujarTerreno(largo, ancho);
+		dibujarMedidas(largo, ancho);
 		dibujarHortalizas(hortaliza, cantidad, largo, ancho);
 	  }
 	});
@@ -42,30 +47,17 @@ document.addEventListener('DOMContentLoaded', function() {
   
 	  // Dibujar el contorno del terreno
 	  const contorno = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-	  contorno.setAttribute("x", "50");
-	  contorno.setAttribute("y", "50");
+	  contorno.setAttribute("x", "0");
+	  contorno.setAttribute("y", "0");
 	  contorno.setAttribute("width", largo);
 	  contorno.setAttribute("height", ancho);
-	  contorno.setAttribute("stroke", "black");
+	  contorno.setAttribute("stroke", "white");
 	  contorno.setAttribute("fill", "none");
 	  svg.appendChild(contorno);
+	}
   
-	  // Dibujar líneas para representar el terreno
-	  const lineaHorizontal = document.createElementNS("http://www.w3.org/2000/svg", "line");
-	  lineaHorizontal.setAttribute("x1", "50");
-	  lineaHorizontal.setAttribute("y1", "50");
-	  lineaHorizontal.setAttribute("x2", "50");
-	  lineaHorizontal.setAttribute("y2", ancho + 50);
-	  lineaHorizontal.setAttribute("stroke", "black");
-	  svg.appendChild(lineaHorizontal);
-  
-	  const lineaVertical = document.createElementNS("http://www.w3.org/2000/svg", "line");
-	  lineaVertical.setAttribute("x1", "50");
-	  lineaVertical.setAttribute("y1", ancho + 50);
-	  lineaVertical.setAttribute("x2", largo + 50);
-	  lineaVertical.setAttribute("y2", ancho + 50);
-	  lineaVertical.setAttribute("stroke", "black");
-	  svg.appendChild(lineaVertical);
+	function dibujarMedidas(largo, ancho) {
+	  medidas.innerHTML = `Largo: ${largo} metros, Ancho: ${ancho} metros`;
 	}
   
 	function dibujarHortalizas(hortaliza, cantidad, largo, ancho) {
@@ -77,23 +69,26 @@ document.addEventListener('DOMContentLoaded', function() {
 	  const distanciaX = largo / cantidadPorFila;
 	  const distanciaY = ancho / cantidadPorFila;
   
+	  // Calculamos el tamaño proporcional de las hortalizas
+	  const tamanoHortaliza = Math.min(distanciaX, distanciaY) * 0.8; // El 80% del menor de los dos lados
+  
 	  // Dibujar la hortaliza seleccionada en puntos equidistantes dentro del terreno
 	  for (let i = 0; i < cantidadPorFila; i++) {
 		for (let j = 0; j < cantidadPorFila; j++) {
-		  const x = 50 + distanciaX * i + distanciaX / 2;
-		  const y = 50 + distanciaY * j + distanciaY / 2;
+		  const x = distanciaX * i + distanciaX / 2;
+		  const y = distanciaY * j + distanciaY / 2;
   
 		  let hortalizaShape;
   
 		  switch (hortaliza) {
 			case 'zanahoria':
-			  hortalizaShape = "<polygon points='" + x + "," + y + " " + (x + 25) + "," + (y + 40) + " " + (x + 50) + "," + y + "' fill='orange' stroke='black' />";
+			  hortalizaShape = "<polygon points='" + (x - tamanoHortaliza / 2) + "," + (y + tamanoHortaliza / 2) + " " + (x + tamanoHortaliza / 2) + "," + (y - tamanoHortaliza / 2) + " " + (x + tamanoHortaliza / 2) + "," + (y + tamanoHortaliza / 2) + "' fill='orange' stroke='black' />";
 			  break;
 			case 'lechuga':
-			  hortalizaShape = "<circle cx='" + x + "' cy='" + y + "' r='20' fill='green' stroke='black' />";
+			  hortalizaShape = "<circle cx='" + x + "' cy='" + y + "' r='" + (tamanoHortaliza / 2) + "' fill='green' stroke='black' />";
 			  break;
 			case 'tomate':
-			  hortalizaShape = "<circle cx='" + x + "' cy='" + y + "' r='15' fill='red' stroke='black' />";
+			  hortalizaShape = "<circle cx='" + x + "' cy='" + y + "' r='" + (tamanoHortaliza / 2) + "' fill='red' stroke='black' />";
 			  break;
 			default:
 			  return; // No se pudo reconocer la hortaliza, salir sin hacer nada
@@ -105,4 +100,6 @@ document.addEventListener('DOMContentLoaded', function() {
 	  }
 	}
   });
+  
+  
   

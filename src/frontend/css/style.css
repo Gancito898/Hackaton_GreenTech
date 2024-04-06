@@ -463,46 +463,56 @@ footer a:hover {
 	font:14px "Trebuchet MS", Arial, Helvetica, sans-serif;
 	margin:0
 }
+
+
 .panel-datos {
-	text-align: center;
-	background-color: white; /* Establece el color de fondo en blanco */
-	padding: 20px; /* Añade un relleno para separar el contenido del borde */
-	border-radius: 8px; /* Agrega bordes redondeados al contenedor */
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Agrega una sombra suave */
+	border: 1px solid #ccc;
+	padding: 20px;
+	margin-bottom: 20px;
   }
   
-  #terreno-form {
+  .panel-datos form {
 	display: flex;
 	flex-direction: column;
-	align-items: center;
   }
   
-  #terreno-form label {
-	margin-bottom: 10px;
+  .panel-datos label {
+	margin-bottom: 5px;
   }
   
-  #terreno-form input,
-  #terreno-form select,
-  #terreno-form button {
+  .panel-datos input,
+  .panel-datos select {
 	margin-bottom: 10px;
 	padding: 5px;
   }
   
-  #terreno-form button {
-	padding: 8px 16px;
-	background-color: #007bff;
-	color: #fff;
+  .panel-datos button {
+	padding: 10px;
+	background-color: #4CAF50;
+	color: white;
 	border: none;
-	border-radius: 4px;
 	cursor: pointer;
   }
   
   #resultado {
 	margin-top: 20px;
+	font-weight: bold;
+  }
+  
+  .terreno-container {
+	position: relative;
+	max-width: 100%;
   }
   
   #terreno-svg {
-	display: block;
-	margin: 0 auto;
+	width: 100%;
+	height: auto;
+  }
+  
+  #medidas {
+	position: absolute;
+	bottom: 10px;
+	left: 10px;
+	font-size: 14px;
   }
   
