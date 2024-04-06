@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Agrox | Products</title>
+<title>GreenTech Control</title>
 <meta charset="utf-8">
 <link rel="stylesheet" href="css/reset.css" type="text/css" media="all">
 <link rel="stylesheet" href="css/layout.css" type="text/css" media="all">
@@ -86,12 +86,25 @@
               <label for="cantidad">Cantidad:</label>
               <input type="number" id="cantidad" name="cantidad" value="0">
               <button type="submit">Comparar Terreno</button>
+              <br><br><br>
             </form>
             <div id="resultado"></div>
             <div class="terreno-container">
               <svg id="terreno-svg"></svg>
               <div id="medidas"></div>
             </div>
+            <button id="empezar-cultivo-btn">Empezar cultivo</button>
+      <div id="myModal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <form id="transaccion-form">
+            <label for="remitente">Remitente:</label>
+            <input type="text" id="remitente" name="remitente" required>
+            <label for="destinatario">Destinatario:</label>
+            <input type="text" id="destinatario" name="destinatario" required>
+            <label for="cycles">Cantidad de Cycles:</label>
+            <input type="number" id="cycles" name="cycles" required>
+            <button type="button" id="realizar-transaccion">Realizar transacción</button>
           </section>
         </main>
       

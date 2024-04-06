@@ -9,12 +9,15 @@ $(window).load(function(){
 })
 
 
-
 document.addEventListener('DOMContentLoaded', function() {
 	const form = document.getElementById('terreno-form');
 	const resultado = document.getElementById('resultado');
 	const svg = document.getElementById('terreno-svg');
 	const medidas = document.getElementById('medidas');
+	const empezarCultivoBtn = document.getElementById('empezar-cultivo-btn');
+	const modal = document.getElementById('myModal');
+	const closeModalBtn = document.getElementsByClassName('close')[0];
+	const realizarTransaccionBtn = document.getElementById('realizar-transaccion');
   
 	form.addEventListener('submit', function(event) {
 	  event.preventDefault();
@@ -42,6 +45,33 @@ document.addEventListener('DOMContentLoaded', function() {
 	  }
 	});
   
+	empezarCultivoBtn.addEventListener('click', function() {
+	  modal.style.display = 'block';
+	});
+  
+	closeModalBtn.addEventListener('click', function() {
+	  modal.style.display = 'none';
+	});
+  
+	window.addEventListener('click', function(event) {
+	  if (event.target == modal) {
+		modal.style.display = 'none';
+	  }
+	});
+  
+	realizarTransaccionBtn.addEventListener('click', function() {
+	  const remitente = document.getElementById('remitente').value;
+	  const destinatario = document.getElementById('destinatario').value;
+	  const cycles = document.getElementById('cycles').value;
+  
+	  if (remitente && destinatario && cycles) {
+		alert(`Transacción exitosa: Remitente - ${remitente}, Destinatario - ${destinatario}, Cantidad - ${cycles} "Cycles"`);
+		modal.style.display = 'none';
+	  } else {
+		alert('Por favor, ingrese información válida para la transacción.');
+	  }
+	});
+  
 	function dibujarTerreno(largo, ancho) {
 	  svg.innerHTML = ''; // Limpiar el SVG
   
@@ -51,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	  contorno.setAttribute("y", "0");
 	  contorno.setAttribute("width", largo);
 	  contorno.setAttribute("height", ancho);
-	  contorno.setAttribute("stroke", "white");
+	  contorno.setAttribute("stroke", "white"); // Cambiar el color de la línea a blanco
 	  contorno.setAttribute("fill", "none");
 	  svg.appendChild(contorno);
 	}
@@ -100,6 +130,4 @@ document.addEventListener('DOMContentLoaded', function() {
 	  }
 	}
   });
-  
-  
   
