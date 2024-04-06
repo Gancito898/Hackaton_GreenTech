@@ -9,7 +9,7 @@ Clone the project
 Go to the project directory
 
 ```bash
-  cd electronica
+  cd Hackaton_GreenTech
 ```
 
 Install dependencies
